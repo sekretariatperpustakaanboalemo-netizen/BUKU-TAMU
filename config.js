@@ -9,7 +9,7 @@
  */
 window.APP_CONFIG = {
   API_URL: 'https://script.google.com/macros/s/AKfycbw97AQmeWME9RgqkOm66WysuYX8dScCh6u1KSbxsWZy33VCNEv4Mx4v4dCNP3qAPxLOxw/exec',
-  BASE_URL: ''
+  BASE_URL: 'https://sekretariatperpustakaanboalemo-netizen.github.io/BUKU-TAMU/'
 };
 
 /* ---------- Fungsi bantu bersama (dipakai semua halaman) ---------- */
