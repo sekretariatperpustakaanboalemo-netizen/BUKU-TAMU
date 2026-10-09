@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cetak QR Buku Tamu</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container no-print">
+  <div class="card">
+    <h2>Cetak QR Code Buku Tamu</h2>
+    <label for="lokasi">Lokasi (pisahkan dengan koma untuk beberapa QR)</label>
+    <input type="text" id="lokasi" value="resepsionis" placeholder="resepsionis, ruang-baca, kearsipan">
+    <p class="hint">Contoh: <code>resepsionis, ruang-baca</code> akan membuat 2 lembar QR dengan alamat
+      <code>.../index.html?lokasi=resepsionis</code> dan <code>...?lokasi=ruang-baca</code>.
+      Gunakan huruf kecil, angka, dan tanda minus saja.</p>
+
+    <label for="ukuran">Ukuran kertas</label>
+    <select id="ukuran">
+      <option value="a4">A4</option>
+      <option value="a5">A5</option>
+    </select>
+
+    <label for="judul">Judul</label>
+    <input type="text" id="judul" value="Scan untuk Mengisi Buku Tamu" maxlength="60">
+
+    <div class="row" style="margin-top:16px">
+      <button class="btn" id="btnBuat">Buat QR</button>
+      <button class="btn secondary" id="btnCetak">Cetak</button>
+    </div>
+    <div id="msg" class="msg"></div>
+  </div>
+</div>
+
+<div id="sheets"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/qr.js"></script>
+</body>
+</html>

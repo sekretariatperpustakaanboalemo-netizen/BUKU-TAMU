@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Buku Tamu</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginView" class="container">
+  <div class="card" style="margin-top:60px">
+    <h2>Login Admin</h2>
+    <form id="loginForm">
+      <label for="pw">Password</label>
+      <input type="password" id="pw" autocomplete="current-password" required>
+      <div id="loginMsg" class="msg"></div>
+      <button class="btn block" type="submit">Masuk</button>
+    </form>
+  </div>
+</div>
+
+<!-- APLIKASI -->
+<div id="appView" class="hidden">
+  <div class="topbar no-print">
+    <h1 id="title">Admin Buku Tamu</h1>
+    <div class="row">
+      <a class="btn secondary small" href="qr.html" target="_blank">Cetak QR</a>
+      <button class="btn secondary small" id="btnLogout">Keluar</button>
+    </div>
+  </div>
+
+  <div class="container wide">
+    <div class="tabs no-print">
+      <button data-tab="dash" class="active">Dashboard</button>
+      <button data-tab="data">Data Tamu</button>
+      <button data-tab="set">Pengaturan</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section id="tab-dash">
+      <div class="grid">
+        <div class="stat"><div class="n" id="sHari">-</div><div class="l">Tamu hari ini</div></div>
+        <div class="stat"><div class="n" id="sMinggu">-</div><div class="l">Minggu ini</div></div>
+        <div class="stat"><div class="n" id="sBulan">-</div><div class="l">Bulan ini</div></div>
+        <div class="stat"><div class="n" id="sTotal">-</div><div class="l">Total semua</div></div>
+      </div>
+      <div class="card">
+        <h2>Kunjungan 30 Hari Terakhir</h2>
+        <div class="bars" id="bars"></div>
+        <div class="bars-x"><span id="xFrom"></span><span id="xTo"></span></div>
+      </div>
+      <div class="card">
+        <h2>Keperluan Terbanyak</h2>
+        <div id="topKep"></div>
+      </div>
+    </section>
+
+    <!-- DATA -->
+    <section id="tab-data" class="hidden">
+      <div class="card no-print">
+        <div class="filters">
+          <div><label>Cari</label><input type="text" id="fQ" placeholder="Nama / instansi / HP"></div>
+          <div><label>Dari tanggal</label><input type="date" id="fFrom"></div>
+          <div><label>Sampai tanggal</label><input type="date" id="fTo"></div>
+          <div><label>Keperluan</label><select id="fKep"><option value="">Semua</option></select></div>
+          <div class="row">
+            <button class="btn small" id="btnCari">Terapkan</button>
+            <button class="btn secondary small" id="btnReset">Reset</button>
+          </div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn secondary small" id="btnCsv">Export CSV (Excel)</button>
+          <button class="btn secondary small" id="btnPdf">Cetak Laporan / PDF</button>
+        </div>
+      </div>
+
+      <div class="report-only" id="reportHead">
+        <h2 id="repTitle"></h2><p id="repPeriod"></p>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Tanggal</th><th>Jam</th><th>Nama</th><th>Instansi</th><th>No. HP</th>
+              <th>Keperluan</th><th>Dituju</th><th>Keterangan</th><th>Lokasi</th><th class="no-print">Aksi</th>
+            </tr></thead>
+            <tbody id="tbody"><tr><td colspan="10">Memuat...</td></tr></tbody>
+          </table>
+        </div>
+        <div class="pager no-print">
+          <button class="btn secondary small" id="prev">&laquo; Sebelumnya</button>
+          <span id="pageInfo"></span>
+          <button class="btn secondary small" id="next">Berikutnya &raquo;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PENGATURAN -->
+    <section id="tab-set" class="hidden">
+      <div class="card">
+        <h2>Pengaturan Aplikasi</h2>
+        <label>Nama OPD</label><input type="text" id="setNama" maxlength="200">
+        <label>URL Logo (https, gambar PNG/JPG)</label><input type="url" id="setLogo" placeholder="https://...">
+        <p class="hint">Unggah logo ke GitHub repo ini (mis. <code>logo.png</code>) lalu isi dengan alamat publiknya.</p>
+        <label>Pilihan Keperluan (pisahkan dengan koma)</label>
+        <textarea id="setKep"></textarea>
+        <label><input type="checkbox" id="setFoto" style="width:auto"> Aktifkan foto selfie</label>
+        <label><input type="checkbox" id="setTtd" style="width:auto"> Aktifkan tanda tangan digital</label>
+        <div id="setMsg" class="msg"></div>
+        <button class="btn" id="btnSimpan" style="margin-top:12px">Simpan Pengaturan</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- MODAL EDIT -->
+<div class="modal" id="editModal"><div class="box">
+  <h2>Edit Data Tamu</h2>
+  <label>Nama</label><input type="text" id="eNama" maxlength="100">
+  <label>Instansi</label><input type="text" id="eInstansi" maxlength="120">
+  <label>No. HP</label><input type="tel" id="eHp" maxlength="20">
+  <label>Keperluan</label><select id="eKep"></select>
+  <label>Dituju</label><input type="text" id="eDituju" maxlength="100">
+  <label>Keterangan</label><textarea id="eKet" maxlength="500"></textarea>
+  <div id="eMedia" style="margin-top:12px"></div>
+  <div id="eMsg" class="msg"></div>
+  <div class="row" style="margin-top:14px">
+    <button class="btn" id="eSimpan">Simpan</button>
+    <button class="btn secondary" id="eBatal">Batal</button>
+  </div>
+</div></div>
+
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Buku Tamu Digital</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="brand">
+  <img id="logo" alt="Logo" class="hidden">
+  <h1 id="opd">Buku Tamu Digital</h1>
+  <p>Silakan isi data kunjungan Anda</p>
+</header>
+
+<main class="container">
+  <!-- FORM -->
+  <section id="formCard" class="card">
+    <form id="form" novalidate autocomplete="off">
+      <label for="nama">Nama Lengkap <span class="req">*</span></label>
+      <input type="text" id="nama" maxlength="100" required>
+
+      <label for="instansi">Instansi / Asal <span class="req">*</span></label>
+      <input type="text" id="instansi" maxlength="120" placeholder="Contoh: SMAN 1 Tilamuta / Pribadi" required>
+
+      <label for="hp">No. HP / WhatsApp <span class="req">*</span></label>
+      <input type="tel" id="hp" maxlength="20" inputmode="tel" placeholder="08xxxxxxxxxx" required>
+
+      <label for="keperluan">Keperluan <span class="req">*</span></label>
+      <select id="keperluan" required><option value="">Memuat...</option></select>
+
+      <label for="dituju">Bidang / Pegawai yang Dituju</label>
+      <input type="text" id="dituju" maxlength="100" placeholder="Contoh: Bidang Kearsipan">
+
+      <label for="keterangan">Keterangan</label>
+      <textarea id="keterangan" maxlength="500"></textarea>
+
+      <div id="fotoWrap" class="hidden">
+        <label>Foto Selfie (opsional)</label>
+        <div class="media-box">
+          <video id="video" playsinline muted class="hidden"></video>
+          <img id="fotoPreview" alt="Foto" class="hidden">
+          <canvas id="fotoCanvas" class="hidden"></canvas>
+          <div class="row" style="justify-content:center;margin-top:8px">
+            <button type="button" class="btn secondary small" id="btnKamera">Buka Kamera</button>
+            <button type="button" class="btn small hidden" id="btnJepret">Ambil Foto</button>
+            <button type="button" class="btn secondary small hidden" id="btnUlangFoto">Ulangi</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="ttdWrap" class="hidden">
+        <label>Tanda Tangan (opsional)</label>
+        <canvas id="ttd" class="sign"></canvas>
+        <button type="button" class="btn secondary small" id="btnHapusTtd" style="margin-top:6px">Hapus Tanda Tangan</button>
+      </div>
+
+      <!-- Honeypot: jangan diisi manusia -->
+      <div class="hp" aria-hidden="true">
+        <label>Website <input type="text" id="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <div class="consent">
+        <input type="checkbox" id="setuju">
+        <label for="setuju" style="font-weight:400;margin:0">
+          Saya menyetujui data pribadi saya (nama, instansi, nomor HP, foto, dan tanda tangan) dikumpulkan dan
+          digunakan oleh <span id="opd2">instansi ini</span> semata-mata untuk keperluan pencatatan kunjungan dan
+          keamanan, sesuai UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi. Data tidak dibagikan kepada pihak ketiga.
+        </label>
+      </div>
+
+      <div id="msg" class="msg" role="alert"></div>
+      <button class="btn block" id="btnKirim" type="submit">Kirim</button>
+    </form>
+  </section>
+
+  <!-- TERIMA KASIH -->
+  <section id="thanks" class="card thanks hidden">
+    <div class="check">&#10003;</div>
+    <h2>Terima Kasih</h2>
+    <p>Kunjungan Anda telah tercatat.</p>
+    <p class="hint" id="thanksInfo"></p>
+    <button class="btn secondary" id="btnLagi">Isi untuk Tamu Lain</button>
+  </section>
+</main>
+
+<footer>Buku Tamu Digital &middot; <span id="opd3"></span></footer>
+
+<script src="js/config.js"></script>
+<script src="js/guest.js"></script>
+</body>
+</html>
